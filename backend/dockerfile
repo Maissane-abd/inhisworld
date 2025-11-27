@@ -1,0 +1,23 @@
+# Utiliser l'image Node LTS
+FROM node:20
+
+# Définir le dossier de travail
+WORKDIR /app
+
+# Copier package.json et package-lock.json
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm install
+
+# Copier le code source
+COPY . .
+
+# Construire l'application pour la production
+RUN npm run build
+
+# Exposer le port du serveur
+EXPOSE 3000
+
+# Commande pour démarrer l'application
+CMD ["npm", "run", "start:prod"]
